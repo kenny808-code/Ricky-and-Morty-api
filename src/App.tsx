@@ -8,6 +8,7 @@ export function App() {
       <Route path="/" element={<Navigate to="/characters" replace />} />
       <Route path="/characters" element={<CharactersPage />} />
       <Route path="/character/:id" element={<CharacterDetailPage />} />
+      <R
     </Routes>
   );
 }
