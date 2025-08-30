@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import { getCharacterById } from "@/services/characters";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -49,20 +49,48 @@ export function CharacterDetailPage() {
           <CardTitle className="text-3xl font-bold">{character.name}</CardTitle>
         </CardHeader>
         <CardContent>
-          <p><strong>Status:</strong> {character.status}</p>
-          <p><strong>Species:</strong> {character.species}</p>
-          {character.type && <p><strong>Type:</strong> {character.type}</p>}
-          <p><strong>Gender:</strong> {character.gender}</p>
-          <p><strong>Origin:</strong> {character.origin.name}</p>
-          <p><strong>Location:</strong> {character.location.name}</p>
+          <p>
+            <strong>Status:</strong> {character.status}
+          </p>
+          <p>
+            <strong>Species:</strong> {character.species}
+          </p>
+          {character.type && (
+            <p>
+              <strong>Type:</strong> {character.type}
+            </p>
+          )}
+          <p>
+            <strong>Gender:</strong> {character.gender}
+          </p>
+          <p>
+            <strong>Origin:</strong> {character.origin.name}
+          </p>
+          <p>
+            <strong>Location:</strong> {character.location.name}
+          </p>
 
           <div className="mt-4">
             <h3 className="text-lg font-semibold mb-2">Episodes</h3>
+            {character.episode.length > 0 ? (
             <ul className="list-disc pl-5">
-              {character.episode.map((ep) => (
-                <li key={ep}>{ep}</li>
-              ))}
+              {character.episode.map((ep) => {
+                const episodeId = ep.split("/").pop(); 
+                return (
+                  <li key={ep}>
+                    <Link
+                      to={`/episode/${episodeId}`}
+                      className="hover:underline"
+                    >
+                    {ep}
+                    </Link>
+                  </li>
+                );
+              })}
             </ul>
+             ) : (
+              <p>No characters found.</p>
+            )}
           </div>
         </CardContent>
       </Card>
