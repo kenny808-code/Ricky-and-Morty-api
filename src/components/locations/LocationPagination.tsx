@@ -13,7 +13,7 @@ type Props = {
   onPageChange: (page: number) => void;
 };
 
-export function CharacterPagination({ currentPage, totalPages, onPageChange }: Props) {
+export function LocationPagination({ currentPage, totalPages, onPageChange }: Props) {
   if (totalPages <= 1) return null;
 
   return (
